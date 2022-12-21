@@ -93,6 +93,7 @@ export function SignIn() {
 
 const styles = StyleSheet.create({
   TextInput: {
+    width: 200,
     height: 40,
     margin: 12,
     borderWidth: 1,
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   registerBtn: {
-    width: "80%",
+    width: 200,
     borderRadius: 25,
     height: 50,
     alignItems: "center",
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F4B910",
   },
   loginBtn: {
-    width: "80%",
+    width: 200,
     borderRadius: 25,
     height: 50,
     alignItems: "center",
@@ -123,7 +124,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#3575ED",
   },
   forgot_button: {
-    width: "80%",
+    width: 200,
     borderRadius: 25,
     height: 50,
     alignItems: "center",
