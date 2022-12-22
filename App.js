@@ -9,6 +9,10 @@ import store from "./state/store/Store";
 import persistor from "./state/store/Store";
 import { Loading } from "./components/Loading";
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Profile } from "./components/Profile";
+const Stack = createNativeStackNavigator();
+
 export default function App() {
   return (
     <NavigationContainer>

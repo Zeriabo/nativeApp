@@ -30,7 +30,10 @@ export function SignIn() {
     })
       .then((response) => response.json())
       .then((responseData) => {
-        console.log(responseData);
+        if (responseData.token != null) {
+          console.log(responseData);
+          navigation.navigate("Profile");
+        }
       })
       .catch((error) => {
         console.error(error);
