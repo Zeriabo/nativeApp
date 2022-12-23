@@ -14,7 +14,7 @@ import {
 import { connect } from "react-redux";
 import { SignIn } from "./SignIn";
 
-export function Home() {
+export function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <View
@@ -30,9 +30,7 @@ export function Home() {
         />
 
         <TouchableOpacity
-          onPress={() => {
-            console.log("kessi");
-          }}
+          onPress={() => navigation.navigate("SignIn")}
           style={styles.SignInButton}
         >
           <Text
@@ -43,14 +41,11 @@ export function Home() {
               backgroundColor: "rgba(21,44,249,0,65)",
             }}
           >
-            Sign in
+            Sign In
           </Text>
         </TouchableOpacity>
-
         <TouchableOpacity
-          onPress={() => {
-            console.log("kessi");
-          }}
+          onPress={() => navigation.navigate("SignUp")}
           style={styles.SignInButton}
         >
           <Text
@@ -67,7 +62,7 @@ export function Home() {
         <View style={styles.bottomView}>
           <Button
             title="About us"
-            onPress={() => Alert.alert("Button pressed")}
+            onPress={() => navigation.navigate("AboutUs")}
           />
         </View>
       </View>
