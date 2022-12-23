@@ -15,12 +15,33 @@ import { SignIn } from "./SignIn";
 
 export function Profile({ route, navigation }) {
   console.log(route.params.responseData);
+  function fetchMessages(token) {
+    fetch("http://localhost:8080/readmessages", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+      }),
+    })
+      .then((responseData) => {
+        if (responseData.status) {
+          Alert.alert("No messages");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        Alert.alert("Error");
+      });
+  }
   return (
     <View style={styles.container}>
       <Text>Hello {route.params.responseData.name}</Text>
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => login()}
+        onPress={() => fetchMessages(route.params.responseData.token)}
         title="Inbox"
       >
         <Text>Inbox</Text>
