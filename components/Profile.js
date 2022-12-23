@@ -17,7 +17,13 @@ export function Profile() {
   return (
     <View style={styles.container}>
       <Text>Profile</Text>
-      <Button>Profile</Button>
+      <TouchableOpacity
+        style={styles.loginBtn}
+        onPress={() => login()}
+        title="Log in"
+      >
+        <Text>LOGIN</Text>
+      </TouchableOpacity>
     </View>
   );
 }

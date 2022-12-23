@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 
-export function SignIn() {
+export function SignIn({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,7 +37,7 @@ export function SignIn() {
       })
       .catch((error) => {
         console.error(error);
-        Alert.alert("invalid data");
+        Alert.alert("Error");
       });
   }
   const forgetPassword = () => {
@@ -65,19 +65,18 @@ export function SignIn() {
           onChangeText={(password) => setPassword(password)}
         />
       </View>
-
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => {
-          login();
-        }}
+        onPress={() => login()}
+        title="Log in"
       >
-        <Text style={styles.loginText}>LOGIN</Text>
+        <Text>LOGIN</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.registerBtn}
         onPress={() => {
-          signup();
+          navigation.navigate("SignUp");
         }}
       >
         <Text>Register</Text>
