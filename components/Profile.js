@@ -13,17 +13,14 @@ import {
 import { connect } from "react-redux";
 import { SignIn } from "./SignIn";
 
-export function Profile() {
+export function Profile({ route, navigation }) {
+  console.log(route.params.responseData);
   return (
     <View style={styles.container}>
       <Text>Profile</Text>
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => login()}
-        title="Log in"
-      >
-        <Text>LOGIN</Text>
-      </TouchableOpacity>
+      <Text>{route.params.responseData.email}</Text>
+      <Text>{route.params.responseData.name}</Text>
+      <Text>{route.params.responseData.dateofbirth}</Text>
     </View>
   );
 }

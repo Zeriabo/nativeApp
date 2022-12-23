@@ -32,7 +32,7 @@ export function SignIn({ navigation }) {
       .then((responseData) => {
         if (responseData.token != null) {
           console.log(responseData);
-          navigation.navigate("Profile");
+          navigation.navigate("Profile", { responseData });
         }
       })
       .catch((error) => {
