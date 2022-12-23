@@ -48,7 +48,7 @@ export function Profile({ route, navigation }) {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => login()}
+        onPress={() => navigation.navigate("SendMessage", { route })}
         title="Send a message"
       >
         <Text>Send message</Text>

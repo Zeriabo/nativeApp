@@ -12,6 +12,7 @@ import { Loading } from "./components/Loading";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Profile } from "./components/Profile";
+import { SendMessage } from "./components/SendMessage";
 const Stack = createNativeStackNavigator();
 
 const AboutUsScreen = () => (
@@ -38,6 +39,7 @@ export default function App() {
             <Stack.Screen name="SignIn" component={SignIn} />
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="AboutUs" component={AboutUsScreen} />
+            <Stack.Screen name="SendMessage" component={SendMessage} />
           </Stack.Navigator>
         </View>
       </Provider>
