@@ -18,7 +18,16 @@ export default function App() {
     <NavigationContainer>
       <Provider store={store}>
         <View style={styles.container}>
-          <Home />
+          <Stack.Navigator>
+            {/* <Tab.Navigator>
+              <Tab.Screen name="Feed" component={Home} />
+              <Tab.Screen name="Messages" component={Profile} />
+            </Tab.Navigator> */}
+            <Stack.Screen name="Home" component={Home} />
+            <Stack.Screen name="Profile" component={Profile} />
+            <Stack.Screen name="SignIn" component={SignIn} />
+            <Stack.Screen name="SignUp" component={SignIn} />
+          </Stack.Navigator>
         </View>
       </Provider>
     </NavigationContainer>
@@ -27,8 +36,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
     justifyContent: "center",
+    alignItem: "center",
+    backgroundColor: "#ecf0f1",
   },
 });
