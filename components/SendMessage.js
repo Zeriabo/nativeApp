@@ -41,12 +41,17 @@ export function SendMessage(data) {
         Alert.alert("invalid data");
       });
   }
-
+  function clear() {
+    setMessageBody("");
+    setReceivers("");
+    setTitle("");
+  }
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <View style={styles.inputView}>
         <TextInput
+          value={title}
           style={styles.TextInput}
           placeholder="title"
           placeholderTextColor="#003f5c"
@@ -56,18 +61,19 @@ export function SendMessage(data) {
 
       <View style={styles.inputView}>
         <TextInput
+          value={receivers}
           style={styles.TextInput}
           placeholder="receivers"
           placeholderTextColor="#003f5c"
           onChangeText={(receiver) => {
             setReceivers(receiver.split(","));
           }}
-          id="messageBody"
         />
       </View>
 
       <View style={styles.textAreaContainer}>
         <TextInput
+          value={messageBody}
           style={styles.textArea}
           underlineColorAndroid="transparent"
           placeholder="Type something"

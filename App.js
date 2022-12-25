@@ -12,6 +12,7 @@ import { Loading } from "./components/Loading";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Profile } from "./components/Profile";
+import { Inbox } from "./components/Inbox";
 import { SendMessage } from "./components/SendMessage";
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,7 @@ export default function App() {
             <Stack.Screen name="SignUp" component={SignUp} />
             <Stack.Screen name="AboutUs" component={AboutUsScreen} />
             <Stack.Screen name="SendMessage" component={SendMessage} />
+            <Stack.Screen name="Inbox" component={Inbox} />
           </Stack.Navigator>
         </View>
       </Provider>

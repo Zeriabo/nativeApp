@@ -11,10 +11,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { connect } from "react-redux";
-import { SignIn } from "./SignIn";
+import { Inbox } from "./Inbox";
 
 export function Profile({ route, navigation }) {
-  console.log(route.params.responseData);
   function fetchMessages(token) {
     fetch("http://localhost:8080/readmessages", {
       method: "POST",
@@ -27,11 +26,14 @@ export function Profile({ route, navigation }) {
       }),
     })
       .then((responseData) => {
-        console.log(responseData);
         if (responseData.status == 204) {
           Alert.alert("No messages");
         } else {
-          return responseData;
+          responseData.json().then((data) => {
+            console.log(data.messages);
+            navigation.navigate("Inbox", data.messages);
+          });
+          return responseData.body;
         }
       })
       .catch((error) => {
