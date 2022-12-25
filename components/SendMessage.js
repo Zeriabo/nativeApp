@@ -13,8 +13,6 @@ import {
 import { connect } from "react-redux";
 
 export function SendMessage(data) {
-  console.log(data);
-  console.log(data.route.params.route.params.responseData.token);
   const [receivers, setReceivers] = useState([""]);
   const [title, setTitle] = useState("");
   const [messageBody, setMessageBody] = useState("");
@@ -23,8 +21,8 @@ export function SendMessage(data) {
     fetch("http://localhost:8080/sendmessage", {
       method: "POST",
       headers: {
-        Accept: "application/json",
         "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         token: data.route.params.route.params.responseData.token,
@@ -33,11 +31,9 @@ export function SendMessage(data) {
         receivers: receivers,
       }),
     })
-      .then((response) => response.json())
-      .then((responseData) => {
-        if (responseData.token != null) {
-          console.log(responseData);
-          navigation.navigate("Home");
+      .then((response) => {
+        if (response.status == 200) {
+          Alert.alert("Message sent!");
         }
       })
       .catch((error) => {
@@ -57,22 +53,28 @@ export function SendMessage(data) {
           onChangeText={(title) => setTitle(title)}
         />
       </View>
-      <View style={styles.inputView}>
-        <TextInput
-          style={styles.TextInput}
-          placeholder="messageBody"
-          placeholderTextColor="#003f5c"
-          onChangeText={(messageBody) => setMessageBody(messageBody)}
-          id="messageBody"
-        />
-      </View>
+
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
           placeholder="receivers"
           placeholderTextColor="#003f5c"
-          onChangeText={(receivers) => setReceivers(receivers)}
+          onChangeText={(receiver) => {
+            setReceivers(receiver.split(","));
+          }}
           id="messageBody"
+        />
+      </View>
+
+      <View style={styles.textAreaContainer}>
+        <TextInput
+          style={styles.textArea}
+          underlineColorAndroid="transparent"
+          placeholder="Type something"
+          placeholderTextColor="grey"
+          numberOfLines={10}
+          multiline={true}
+          onChangeText={(message) => setMessageBody(message)}
         />
       </View>
 
@@ -137,5 +139,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 40,
     backgroundColor: "#DCF410",
+  },
+  textAreaContainer: {
+    borderColor: "grey",
+    borderWidth: 1,
+    padding: 5,
+  },
+  textArea: {
+    height: 150,
+    justifyContent: "flex-start",
+    width: 350,
   },
 });

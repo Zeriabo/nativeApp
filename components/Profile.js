@@ -27,8 +27,11 @@ export function Profile({ route, navigation }) {
       }),
     })
       .then((responseData) => {
-        if (responseData.status) {
+        console.log(responseData);
+        if (responseData.status == 204) {
           Alert.alert("No messages");
+        } else {
+          return responseData;
         }
       })
       .catch((error) => {
