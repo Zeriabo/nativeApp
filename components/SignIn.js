@@ -31,7 +31,6 @@ export function SignIn({ navigation }) {
       .then((response) => response.json())
       .then((responseData) => {
         if (responseData.token != null) {
-          console.log(responseData);
           navigation.navigate("Profile", { responseData });
         }
       })
