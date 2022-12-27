@@ -13,36 +13,17 @@ import {
 import { connect, useDispatch } from "react-redux";
 import { counterChange } from "../state/store/reducers/counterReducer";
 import store from "../state/store/Store";
-import { signIn } from "../state/store/reducers/userReducer";
 
 export function SignIn({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   function login() {
-    fetch("http://localhost:8080/user/signin", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((responseData) => {
-        if (responseData.token != null) {
-          dispatch(signIn(responseData));
-          console.log(store.getState());
-          navigation.navigate("Profile");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        Alert.alert("Error");
-      });
+    const credentials = {
+      email: email,
+      password: password,
+    };
+    navigation.navigate("Profile", credentials);
   }
   const forgetPassword = () => {
     console.log("forget password");

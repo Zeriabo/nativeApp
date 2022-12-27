@@ -14,31 +14,43 @@ import { connect, useDispatch } from "react-redux";
 import { Inbox } from "./Inbox";
 import store from "../state/store/Store";
 import { useReadMessagesQuery } from "../services/readMessageApi";
-import { readMessageApi } from "../services/readMessageApi";
-export function Profile({ navigation }) {
-  const dispatch = useDispatch();
+import { useLoginQuery } from "../services/userApi";
+
+export function Profile({ route, navigation }) {
   const state = store.getState();
+
+  const { data, error, isLoading } = useLoginQuery(route.params);
+  console.log(state);
 
   function fetchMessages(token) {
     navigation.navigate("Inbox", token);
   }
+
   return (
     <View style={styles.container}>
-      <Text>Hello {state.userReducer.name}</Text>
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => fetchMessages(state.userReducer.token)}
-        title="Inbox"
-      >
-        <Text>Inbox</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => navigation.navigate("SendMessage", { route })}
-        title="Send a message"
-      >
-        <Text>Send message</Text>
-      </TouchableOpacity>
+      {isLoading == false ? (
+        <View>
+          <Text>Hello {data.name}</Text>
+          <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={() => fetchMessages(data.token)}
+            title="Inbox"
+          >
+            <Text>Inbox</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={() => navigation.navigate("SendMessage", { route })}
+            title="Send a message"
+          >
+            <Text>Send message</Text>
+          </TouchableOpacity>
+        </View>
+      ) : isLoading == true ? (
+        <Text>Loading ...</Text>
+      ) : error ? (
+        <Text>Error: {error}</Text>
+      ) : null}
     </View>
   );
 }

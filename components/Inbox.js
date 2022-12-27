@@ -57,7 +57,7 @@ export function Inbox({ route, navigation }) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={data.messages}
+        data={isLoading == false ? data.messages : null}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
