@@ -15,12 +15,17 @@ import { Inbox } from "./Inbox";
 import store from "../state/store/Store";
 import { useReadMessagesQuery } from "../services/readMessageApi";
 import { useLoginQuery } from "../services/userApi";
+import { signIn } from "../state/store/reducers/userReducer";
 
 export function Profile({ route, navigation }) {
   const state = store.getState();
-
+  const dispatch = useDispatch();
   const { data, error, isLoading } = useLoginQuery(route.params);
-  console.log(state);
+  if (data) {
+    console.log(data);
+    dispatch(signIn(data));
+    console.log(state);
+  }
 
   function fetchMessages(token) {
     navigation.navigate("Inbox", token);

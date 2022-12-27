@@ -13,6 +13,7 @@ import logger from "redux-logger";
 import { combineReducers } from "redux";
 import messageReducer from "./reducers/messageReducer";
 import counterReducer from "./reducers/counterReducer";
+import userReducer from "./reducers/userReducer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { readMessageApi } from "../../services/readMessageApi";
 import { userApi } from "../../services/userApi";
@@ -24,6 +25,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   messageReducer,
   counterReducer,
+  userReducer,
   [readMessageApi.reducerPath]: readMessageApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
 });
