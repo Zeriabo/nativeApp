@@ -13,9 +13,18 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { Message } from "./Message";
+import { useReadMessagesQuery } from "../services/readMessageApi";
 
 export function Inbox({ route, navigation }) {
   const [selectedId, setSelectedId] = useState(null);
+  const obj = {
+    token: route.params,
+  };
+  const { data, error, isLoading } = useReadMessagesQuery(obj);
+  if (isLoading == false) {
+    console.log(data);
+  }
+
   const navigateToMessage = (item) => {
     console.log(item);
     navigation.navigate("Message", { item });
@@ -45,12 +54,10 @@ export function Inbox({ route, navigation }) {
     </TouchableOpacity>
   );
 
-  const messages = route.params;
-
   return (
     <View style={styles.container}>
       <FlatList
-        data={messages}
+        data={data.messages}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />

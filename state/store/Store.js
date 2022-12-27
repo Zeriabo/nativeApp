@@ -13,7 +13,10 @@ import logger from "redux-logger";
 import { combineReducers } from "redux";
 import userReducer from "./reducers/userReducer";
 import messageReducer from "./reducers/messageReducer";
+import counterReducer from "./reducers/counterReducer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { readMessageApi } from "../../services/readMessageApi";
+
 const persistConfig = {
   key: "root",
   version: 1,
@@ -22,7 +25,10 @@ const persistConfig = {
 const rootReducer = combineReducers({
   userReducer,
   messageReducer,
+  counterReducer,
+  [readMessageApi.reducerPath]: readMessageApi.reducer,
 });
+
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
@@ -32,7 +38,8 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    }).concat(readMessageApi.middleware),
 });
+console.log(store.getState());
 export const persistor = persistStore(store);
 export default store;

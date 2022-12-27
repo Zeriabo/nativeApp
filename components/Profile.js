@@ -10,43 +10,24 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { Inbox } from "./Inbox";
+import store from "../state/store/Store";
+import { useReadMessagesQuery } from "../services/readMessageApi";
+import { readMessageApi } from "../services/readMessageApi";
+export function Profile({ navigation }) {
+  const dispatch = useDispatch();
+  const state = store.getState();
 
-export function Profile({ route, navigation }) {
   function fetchMessages(token) {
-    fetch("http://localhost:8080/readmessages", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: token,
-      }),
-    })
-      .then((responseData) => {
-        if (responseData.status == 204) {
-          Alert.alert("No messages");
-        } else {
-          responseData.json().then((data) => {
-            console.log(data.messages);
-            navigation.navigate("Inbox", data.messages);
-          });
-          return responseData.body;
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        Alert.alert("Error");
-      });
+    navigation.navigate("Inbox", token);
   }
   return (
     <View style={styles.container}>
-      <Text>Hello {route.params.responseData.name}</Text>
+      <Text>Hello {state.userReducer.name}</Text>
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => fetchMessages(route.params.responseData.token)}
+        onPress={() => fetchMessages(state.userReducer.token)}
         title="Inbox"
       >
         <Text>Inbox</Text>

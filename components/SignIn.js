@@ -10,12 +10,15 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { counterChange } from "../state/store/reducers/counterReducer";
+import store from "../state/store/Store";
+import { signIn } from "../state/store/reducers/userReducer";
 
 export function SignIn({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const dispatch = useDispatch();
   function login() {
     fetch("http://localhost:8080/user/signin", {
       method: "POST",
@@ -31,7 +34,9 @@ export function SignIn({ navigation }) {
       .then((response) => response.json())
       .then((responseData) => {
         if (responseData.token != null) {
-          navigation.navigate("Profile", { responseData });
+          dispatch(signIn(responseData));
+          console.log(store.getState());
+          navigation.navigate("Profile");
         }
       })
       .catch((error) => {
@@ -41,6 +46,8 @@ export function SignIn({ navigation }) {
   }
   const forgetPassword = () => {
     console.log("forget password");
+    dispatch(counterChange(2));
+    console.log(store.getState());
   };
   const signup = () => {};
 
