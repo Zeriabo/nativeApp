@@ -1,5 +1,4 @@
 import messagesReducer from "./messageReducer";
 import userReducer from "./userReducer";
-import counterReducer from "./counterReducer";
 
-export default { messagesReducer, userReducer, counterReducer };
+export default { messagesReducer, userReducer };

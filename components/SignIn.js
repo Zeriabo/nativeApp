@@ -10,14 +10,16 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { connect, useDispatch } from "react-redux";
-import { counterChange } from "../state/store/reducers/counterReducer";
 import store from "../state/store/Store";
 
 export function SignIn({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+  const state = store.getState();
+  console.log(state.userReducer);
+  if (state.userReducer.active) {
+    navigation.navigate("Profile", state.userReducer);
+  }
   function login() {
     const credentials = {
       email: email,
@@ -27,7 +29,7 @@ export function SignIn({ navigation }) {
   }
   const forgetPassword = () => {
     console.log("forget password");
-    dispatch(counterChange(2));
+
     console.log(store.getState());
   };
   const signup = () => {};

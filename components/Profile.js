@@ -20,9 +20,18 @@ import { signIn } from "../state/store/reducers/userReducer";
 export function Profile({ route, navigation }) {
   const state = store.getState();
   const dispatch = useDispatch();
-  console.log(route);
-  const { data, error, isLoading } = useLoginQuery(route.params);
+  console.log(route.params);
+  try {
+    var { data, error, isLoading } = useLoginQuery(route.params);
+  } catch (err) {
+    console.log(err);
+  }
 
+  console.log(data);
+  if (route.params.token != null && data == undefined) {
+    data = route.params;
+  }
+  console.log(data);
   if (data) {
     dispatch(signIn(data));
   }
@@ -33,29 +42,23 @@ export function Profile({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      {isLoading == false ? (
-        <View>
-          <Text>Hello {data.name}</Text>
-          <TouchableOpacity
-            style={styles.loginBtn}
-            onPress={() => fetchMessages(data.token)}
-            title="Inbox"
-          >
-            <Text>Inbox</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.loginBtn}
-            onPress={() => navigation.navigate("SendMessage", { route })}
-            title="Send a message"
-          >
-            <Text>Send message</Text>
-          </TouchableOpacity>
-        </View>
-      ) : isLoading == true ? (
-        <Text>Loading ...</Text>
-      ) : error ? (
-        <Text>Error: {error}</Text>
-      ) : null}
+      <View>
+        <Text>Hello {data.name}</Text>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => fetchMessages(data.token)}
+          title="Inbox"
+        >
+          <Text>Inbox</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => navigation.navigate("SendMessage", { route })}
+          title="Send a message"
+        >
+          <Text>Send message</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
