@@ -25,7 +25,7 @@ export function SignIn({ navigation }) {
       email: email,
       password: password,
     };
-    if (email != "" || password != "") {
+    if (email != "" && password != "") {
       navigation.navigate("Profile", credentials);
     }
   }
