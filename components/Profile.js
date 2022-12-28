@@ -1,19 +1,7 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  Alert,
-  Text,
-  View,
-  Image,
-  TextInput,
-  Button,
-  TouchableOpacity,
-} from "react-native";
-import { connect, useDispatch } from "react-redux";
-import { Inbox } from "./Inbox";
+import React from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
 import store from "../state/store/Store";
-import { useReadMessagesQuery } from "../services/messageApi";
 import { useLoginQuery } from "../services/userApi";
 import { logOut, signIn } from "../state/store/reducers/userReducer";
 
