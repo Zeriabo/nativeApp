@@ -7,6 +7,13 @@ export function Loading() {
   return (
     <View>
       <Text>Loading ...</Text>
+      <Text>Loading ...</Text>
+      <Text>Loading ...</Text>
+      <Text>Loading ...</Text>
+      <Text>Loading ...</Text>
+      <Text>Loading ...</Text>
+      <Text>Loading ...</Text>
+      <Text>Loading ...</Text>
     </View>
   );
 }

@@ -10,7 +10,7 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { connect } from "react-redux";
+import store from "../state/store/Store";
 
 export function SendMessage({ route, navigation }) {
   const [receivers, setReceivers] = useState([""]);
@@ -19,11 +19,13 @@ export function SendMessage({ route, navigation }) {
 
   function sendMessage() {
     const message = {
-      title,
-      receivers,
-      messageBody,
+      token: store.getState().userReducer.token,
+      title: title,
+      receivers: receivers,
+      messagebody: messageBody,
     };
     navigation.navigate("MessageSent", message);
+    clear();
   }
   function clear() {
     setMessageBody("");

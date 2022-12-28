@@ -13,20 +13,18 @@ import {
 import { connect, useDispatch } from "react-redux";
 import { Inbox } from "./Inbox";
 import store from "../state/store/Store";
-import { useReadMessagesQuery } from "../services/readMessageApi";
+import { useReadMessagesQuery } from "../services/messageApi";
 import { useLoginQuery } from "../services/userApi";
 import { signIn } from "../state/store/reducers/userReducer";
 
 export function Profile({ route, navigation }) {
   const state = store.getState();
   const dispatch = useDispatch();
+  console.log(route);
   const { data, error, isLoading } = useLoginQuery(route.params);
-  console.log(error);
-  console.log(data);
+
   if (data) {
-    console.log(data);
     dispatch(signIn(data));
-    console.log(state);
   }
 
   function fetchMessages(token) {

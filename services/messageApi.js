@@ -18,7 +18,7 @@ export const messageApi = createApi({
     sendMessage: builder.query({
       query: (body) => ({
         //token,title,messagebody,receivers
-        url: `sendmessages`,
+        url: `sendmessage`,
         method: "POST",
         body: body,
       }),

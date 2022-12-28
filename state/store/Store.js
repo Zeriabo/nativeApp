@@ -15,7 +15,9 @@ import messageReducer from "./reducers/messageReducer";
 import counterReducer from "./reducers/counterReducer";
 import userReducer from "./reducers/userReducer";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { readMessageApi } from "../../services/readMessageApi";
+import { readMessageApi } from "../../services/messageApi";
+import { messageApi } from "../../services/messageApi";
+
 import { userApi } from "../../services/userApi";
 const persistConfig = {
   key: "root",
@@ -26,8 +28,8 @@ const rootReducer = combineReducers({
   messageReducer,
   counterReducer,
   userReducer,
-  [readMessageApi.reducerPath]: readMessageApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
+  [messageApi.reducerPath]: messageApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -40,8 +42,8 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     })
-      .concat(readMessageApi.middleware)
-      .concat(userApi.middleware),
+      .concat(userApi.middleware)
+      .concat(messageApi.middleware),
 });
 console.log(store.getState());
 export const persistor = persistStore(store);

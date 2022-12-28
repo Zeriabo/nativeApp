@@ -11,72 +11,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useSendMessageQuery } from "../services/messageApi";
+import userReducer from "../state/store/reducers/userReducer";
 
 export function MessageSent({ route, navigation }) {
-  console.log(route);
-  const [receivers, setReceivers] = useState([""]);
-  const [title, setTitle] = useState("");
-  const [messageBody, setMessageBody] = useState("");
-
   const { data, error, isLoading } = useSendMessageQuery(route.params);
   console.log(data);
   console.log(error);
   console.log(isLoading);
   return (
     <View style={styles.container}>
-      <StatusBar style="auto" />
-      <View style={styles.inputView}>
-        <TextInput
-          value={title}
-          style={styles.TextInput}
-          placeholder="title"
-          placeholderTextColor="#003f5c"
-          onChangeText={(title) => setTitle(title)}
-        />
-      </View>
-
-      <View style={styles.inputView}>
-        <TextInput
-          value={receivers}
-          style={styles.TextInput}
-          placeholder="receivers"
-          placeholderTextColor="#003f5c"
-          onChangeText={(receiver) => {
-            setReceivers(receiver.split(","));
-          }}
-        />
-      </View>
-
-      <View style={styles.textAreaContainer}>
-        <TextInput
-          value={messageBody}
-          style={styles.textArea}
-          underlineColorAndroid="transparent"
-          placeholder="Type something"
-          placeholderTextColor="grey"
-          numberOfLines={10}
-          multiline={true}
-          onChangeText={(message) => setMessageBody(message)}
-        />
-      </View>
-
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => {
-          sendMessage();
-        }}
-      >
-        <Text style={styles.loginText}>Send Message</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.forgot_button}
-        onPress={() => {
-          clear();
-        }}
-      >
-        <Text>Clear</Text>
-      </TouchableOpacity>
+      <Text>The message has been sent ! </Text>
     </View>
   );
 }

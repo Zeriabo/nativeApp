@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { Message } from "./Message";
-import { useReadMessagesQuery } from "../services/readMessageApi";
+import { useReadMessagesQuery } from "../services/messageApi";
 
 export function Inbox({ route, navigation }) {
   const [selectedId, setSelectedId] = useState(null);
