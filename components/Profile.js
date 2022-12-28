@@ -21,6 +21,8 @@ export function Profile({ route, navigation }) {
   const state = store.getState();
   const dispatch = useDispatch();
   const { data, error, isLoading } = useLoginQuery(route.params);
+  console.log(error);
+  console.log(data);
   if (data) {
     console.log(data);
     dispatch(signIn(data));

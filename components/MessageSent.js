@@ -10,26 +10,18 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
-import { connect } from "react-redux";
+import { useSendMessageQuery } from "../services/messageApi";
 
-export function SendMessage({ route, navigation }) {
+export function MessageSent({ route, navigation }) {
+  console.log(route);
   const [receivers, setReceivers] = useState([""]);
   const [title, setTitle] = useState("");
   const [messageBody, setMessageBody] = useState("");
 
-  function sendMessage() {
-    const message = {
-      title,
-      receivers,
-      messageBody,
-    };
-    navigation.navigate("MessageSent", message);
-  }
-  function clear() {
-    setMessageBody("");
-    setReceivers("");
-    setTitle("");
-  }
+  const { data, error, isLoading } = useSendMessageQuery(route.params);
+  console.log(data);
+  console.log(error);
+  console.log(isLoading);
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
