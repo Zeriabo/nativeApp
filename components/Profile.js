@@ -15,19 +15,26 @@ import { Inbox } from "./Inbox";
 import store from "../state/store/Store";
 import { useReadMessagesQuery } from "../services/messageApi";
 import { useLoginQuery } from "../services/userApi";
-import { signIn } from "../state/store/reducers/userReducer";
+import { logOut, signIn } from "../state/store/reducers/userReducer";
 
 export function Profile({ route, navigation }) {
   const state = store.getState();
   const dispatch = useDispatch();
   console.log(route.params);
+  const logout = () => {
+    dispatch(logOut);
+    console.log(state);
+    navigation.navigate("SignIn");
+  };
   try {
     var { data, error, isLoading } = useLoginQuery(route.params);
   } catch (err) {
     console.log(err);
   }
 
-  console.log(data);
+  if (error) {
+    navigation.navigate("SignIn");
+  }
   if (route.params.token != null && data == undefined) {
     data = route.params;
   }
@@ -43,7 +50,14 @@ export function Profile({ route, navigation }) {
   return (
     <View style={styles.container}>
       <View>
-        <Text>Hello {data.name}</Text>
+        <Text>Hello {!isLoading ? data.name : null}</Text>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => logout()}
+          title="logout"
+        >
+          <Text>logout</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.loginBtn}
           onPress={() => fetchMessages(data.token)}

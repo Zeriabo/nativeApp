@@ -25,7 +25,9 @@ export function SignIn({ navigation }) {
       email: email,
       password: password,
     };
-    navigation.navigate("Profile", credentials);
+    if (email != "" || password != "") {
+      navigation.navigate("Profile", credentials);
+    }
   }
   const forgetPassword = () => {
     console.log("forget password");
