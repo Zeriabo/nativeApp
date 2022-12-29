@@ -12,9 +12,7 @@ export function Profile({ route, navigation }) {
   const logout = () => {
     dispatch(logOut());
     navigation.navigate("Home");
-    console.log(state);
   };
-  console.log(route.params);
   function fetchMessages() {
     navigation.navigate("Inbox", state.userReducer.token);
   }

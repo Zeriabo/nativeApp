@@ -17,7 +17,6 @@ const userSlice = createSlice({
       };
     },
     signIn(state, action) {
-      console.log(action);
       return {
         ...state,
         active: action.payload.active,
