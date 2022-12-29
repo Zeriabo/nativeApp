@@ -11,7 +11,6 @@ export function Profile({ route, navigation }) {
   console.log(route.params);
   const logout = () => {
     dispatch(logOut);
-    console.log(state);
     navigation.navigate("SignIn");
   };
   try {

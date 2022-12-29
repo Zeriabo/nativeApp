@@ -16,7 +16,7 @@ export function SignIn({ route, navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const state = store.getState();
-  console.log(state.userReducer);
+
   if (state.userReducer.active == true) {
     navigation.navigate("Profile", state.userReducer);
   }
