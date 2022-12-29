@@ -12,12 +12,12 @@ import {
 } from "react-native";
 import store from "../state/store/Store";
 
-export function SignIn({ navigation }) {
+export function SignIn({ route, navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const state = store.getState();
   console.log(state.userReducer);
-  if (state.userReducer.active) {
+  if (state.userReducer.active == true) {
     navigation.navigate("Profile", state.userReducer);
   }
   function login() {
