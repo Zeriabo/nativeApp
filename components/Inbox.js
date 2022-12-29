@@ -24,7 +24,10 @@ export function Inbox({ route, navigation }) {
   if (isLoading == false) {
     console.log(data);
   }
-
+  data.messages.sort((a, b) => {
+    return a.id < b.id;
+  });
+  console.log(data);
   const navigateToMessage = (item) => {
     console.log(item);
     navigation.navigate("Message", { item });
@@ -57,7 +60,13 @@ export function Inbox({ route, navigation }) {
   return (
     <View style={styles.container}>
       <FlatList
-        data={isLoading == false ? data.messages : null}
+        data={
+          isLoading == false
+            ? data.messages.sort((a, b) => {
+                return b.datetime - a.datetime;
+              })
+            : null
+        }
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />

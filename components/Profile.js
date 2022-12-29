@@ -8,10 +8,11 @@ import { logOut, signIn } from "../state/store/reducers/userReducer";
 export function Profile({ route, navigation }) {
   const state = store.getState();
   const dispatch = useDispatch();
-  console.log(route.params);
+
   const logout = () => {
-    dispatch(logOut);
-    navigation.navigate("SignIn");
+    dispatch(logOut());
+    navigation.navigate("Home");
+    console.log(state);
   };
 
   if (!route.params.active) {
@@ -39,30 +40,36 @@ export function Profile({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <View>
-        <Text>Hello {!isLoading ? data.name : null}</Text>
-        <TouchableOpacity
-          style={styles.loginBtn}
-          onPress={() => logout()}
-          title="logout"
-        >
-          <Text>logout</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.loginBtn}
-          onPress={() => fetchMessages(data.token)}
-          title="Inbox"
-        >
-          <Text>Inbox</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.loginBtn}
-          onPress={() => navigation.navigate("SendMessage", { route })}
-          title="Send a message"
-        >
-          <Text>Send message</Text>
-        </TouchableOpacity>
-      </View>
+      {!isLoading && data != undefined ? (
+        <View>
+          <Text>Hello {data.name}</Text>
+          <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={() => logout()}
+            title="logout"
+          >
+            <Text>logout</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={() => fetchMessages(data.token)}
+            title="Inbox"
+          >
+            <Text>Inbox</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={() => navigation.navigate("SendMessage", { route })}
+            title="Send a message"
+          >
+            <Text>Send message</Text>
+          </TouchableOpacity>
+        </View>
+      ) : (
+        <View style={styles.errorContainer}>
+          <Text style={styles.errorText}> Wrong Input...</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -78,8 +85,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 30,
-    paddingLeft: 20,
+    paddingTop: 50,
+    paddingLeft: 50,
+  },
+  errorContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  errorText: {
+    fontSize: 50,
+    color: "blue",
   },
   registerBtn: {
     width: 200,
