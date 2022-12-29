@@ -1,18 +1,13 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
+import React from "react";
 import {
   StyleSheet,
   SafeAreaView,
-  Alert,
   Text,
   View,
   Image,
-  TextInput,
   Button,
   TouchableOpacity,
 } from "react-native";
-import { connect } from "react-redux";
-import { SignIn } from "./SignIn";
 
 export function Home({ navigation }) {
   return (
