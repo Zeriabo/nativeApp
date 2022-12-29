@@ -5,18 +5,17 @@ import {
   Alert,
   Text,
   View,
-  Image,
   TextInput,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import store from "../state/store/Store";
 
-export function SignIn({ route, navigation }) {
+export function SignIn({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const state = store.getState();
 
+  console.log(state);
   if (state.userReducer.active == true) {
     navigation.navigate("Profile", state.userReducer);
   }

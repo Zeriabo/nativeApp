@@ -13,14 +13,17 @@ export function Profile({ route, navigation }) {
     dispatch(logOut);
     navigation.navigate("SignIn");
   };
-  try {
-    var { data, error, isLoading } = useLoginQuery(route.params);
-  } catch (err) {
-    console.log(err);
-  }
 
-  if (error) {
-    navigation.navigate("SignIn");
+  if (!route.params.active) {
+    try {
+      var { data, error, isLoading } = useLoginQuery(route.params);
+      if (error) {
+        console.log(error);
+        navigation.navigate("SignIn");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
   if (route.params.token != null && data == undefined) {
     data = route.params;
