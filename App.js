@@ -29,10 +29,6 @@ export default function App() {
       <Provider store={store}>
         <View style={styles.container}>
           <Stack.Navigator initialRouteName="Home">
-            {/* <Tab.Navigator>
-              <Tab.Screen name="Feed" component={Home} />
-              <Tab.Screen name="Messages" component={Profile} />
-            </Tab.Navigator> */}
             <Stack.Screen
               name="Home"
               component={Home}
