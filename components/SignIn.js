@@ -9,12 +9,15 @@ import {
   TouchableOpacity,
 } from "react-native";
 import store from "../state/store/Store";
+import axios from "axios";
+import { logOut, signIn } from "../state/store/reducers/userReducer";
+import { useDispatch } from "react-redux";
 
 export function SignIn({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const state = store.getState();
-
+  const dispatch = useDispatch();
   if (state.userReducer.active == true) {
     navigation.navigate("Profile", state.userReducer);
   }
@@ -23,8 +26,12 @@ export function SignIn({ navigation }) {
       email: email,
       password: password,
     };
+
     if (email != "" && password != "") {
-      navigation.navigate("Profile", credentials);
+      axios
+        .post("http://localhost:8080/user/signin", credentials)
+        .then((response) => dispatch(signIn(response.data)))
+        .then(() => navigation.navigate("Profile", state.userReducer));
     }
   }
   const forgetPassword = () => {};

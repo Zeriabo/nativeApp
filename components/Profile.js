@@ -1,77 +1,50 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import store from "../state/store/Store";
 import { useLoginQuery } from "../services/userApi";
-import { useReadMessagesQuery } from "../services/messageApi";
 import { logOut, signIn } from "../state/store/reducers/userReducer";
 
 export function Profile({ route, navigation }) {
   const state = store.getState();
   const dispatch = useDispatch();
-  console.log(state);
+  //you need useEffect to update the function componeent with data
   const logout = () => {
     dispatch(logOut());
     navigation.navigate("Home");
     console.log(state);
   };
-
-  if (!route.params.active) {
-    try {
-      var { data, error, isLoading } = useLoginQuery(route.params);
-
-      if (error) {
-        console.log(error);
-        navigation.navigate("SignIn");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  if (route.params.token != null && data == undefined) {
-    data = route.params;
-  }
-  if (data) {
-    dispatch(signIn(data));
-  }
-
+  console.log(route.params);
   function fetchMessages() {
     navigation.navigate("Inbox", state.userReducer.token);
   }
 
   return (
     <View style={styles.container}>
-      {!isLoading && data != undefined ? (
-        <View>
-          <Text>Hello {data.name}</Text>
-          <TouchableOpacity
-            style={styles.loginBtn}
-            onPress={() => logout()}
-            title="logout"
-          >
-            <Text>logout</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.loginBtn}
-            onPress={() => fetchMessages()}
-            title="Inbox"
-          >
-            <Text>Inbox</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.loginBtn}
-            onPress={() => navigation.navigate("SendMessage", { route })}
-            title="Send a message"
-          >
-            <Text>Send message</Text>
-          </TouchableOpacity>
-        </View>
-      ) : (
-        <View style={styles.errorContainer}>
-          <Text style={styles.errorText}> Wrong Input...</Text>
-        </View>
-      )}
+      <View>
+        <Text>Hello</Text>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => logout()}
+          title="logout"
+        >
+          <Text>logout</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => fetchMessages()}
+          title="Inbox"
+        >
+          <Text>Inbox</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => navigation.navigate("SendMessage", { route })}
+          title="Send a message"
+        >
+          <Text>Send message</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }

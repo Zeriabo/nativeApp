@@ -17,8 +17,16 @@ const userSlice = createSlice({
       };
     },
     signIn(state, action) {
-      state = action.payload;
-      return state;
+      console.log(action);
+      return {
+        ...state,
+        active: action.payload.active,
+        dateofbirth: action.payload.dateofbirth,
+        email: action.payload.email,
+        idUser: action.payload.idUser,
+        name: action.payload.name,
+        token: action.payload.token,
+      };
     },
   },
 });
