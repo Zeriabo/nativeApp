@@ -20,16 +20,19 @@ export function Inbox({ route, navigation }) {
   const obj = {
     token: route.params,
   };
-  const { data, error, isLoading } = useReadMessagesQuery(obj);
-  if (isLoading == false) {
-    console.log(data);
-  }
-  data.messages.sort((a, b) => {
-    return a.id < b.id;
-  });
+
+  var { data, error, isLoading } = useReadMessagesQuery(obj);
   console.log(data);
+  console.log(error);
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text>ERROR </Text>
+      </View>
+    );
+  }
+
   const navigateToMessage = (item) => {
-    console.log(item);
     navigation.navigate("Message", { item });
   };
   const renderItem = ({ item }) => {
@@ -59,17 +62,15 @@ export function Inbox({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={
-          isLoading == false
-            ? data.messages.sort((a, b) => {
-                return b.datetime - a.datetime;
-              })
-            : null
-        }
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      />
+      {isLoading == false && data.messages ? (
+        <FlatList
+          data={isLoading == false ? data.messages : null}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      ) : error != undefined ? (
+        <Text>{error}</Text>
+      ) : null}
     </View>
   );
 }

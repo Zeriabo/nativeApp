@@ -15,7 +15,6 @@ export function SignIn({ navigation }) {
   const [password, setPassword] = useState("");
   const state = store.getState();
 
-  console.log(state);
   if (state.userReducer.active == true) {
     navigation.navigate("Profile", state.userReducer);
   }
@@ -28,12 +27,7 @@ export function SignIn({ navigation }) {
       navigation.navigate("Profile", credentials);
     }
   }
-  const forgetPassword = () => {
-    console.log("forget password");
-
-    console.log(store.getState());
-  };
-  const signup = () => {};
+  const forgetPassword = () => {};
 
   return (
     <View style={styles.container}>

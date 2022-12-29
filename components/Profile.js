@@ -3,12 +3,13 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import store from "../state/store/Store";
 import { useLoginQuery } from "../services/userApi";
+import { useReadMessagesQuery } from "../services/messageApi";
 import { logOut, signIn } from "../state/store/reducers/userReducer";
 
 export function Profile({ route, navigation }) {
   const state = store.getState();
   const dispatch = useDispatch();
-
+  console.log(state);
   const logout = () => {
     dispatch(logOut());
     navigation.navigate("Home");
@@ -18,6 +19,7 @@ export function Profile({ route, navigation }) {
   if (!route.params.active) {
     try {
       var { data, error, isLoading } = useLoginQuery(route.params);
+
       if (error) {
         console.log(error);
         navigation.navigate("SignIn");
@@ -26,16 +28,16 @@ export function Profile({ route, navigation }) {
       console.log(err);
     }
   }
+
   if (route.params.token != null && data == undefined) {
     data = route.params;
   }
-  console.log(data);
   if (data) {
     dispatch(signIn(data));
   }
 
-  function fetchMessages(token) {
-    navigation.navigate("Inbox", token);
+  function fetchMessages() {
+    navigation.navigate("Inbox", state.userReducer.token);
   }
 
   return (
@@ -52,7 +54,7 @@ export function Profile({ route, navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.loginBtn}
-            onPress={() => fetchMessages(data.token)}
+            onPress={() => fetchMessages()}
             title="Inbox"
           >
             <Text>Inbox</Text>
