@@ -16,6 +16,7 @@ import { Inbox } from "./components/Inbox";
 import { Message } from "./components/Message";
 import { SendMessage } from "./components/SendMessage";
 import { MessageSent } from "./components/MessageSent";
+import { ForgetPassword } from "./components/ForgetPassword";
 const Stack = createNativeStackNavigator();
 
 const AboutUsScreen = () => (
@@ -42,6 +43,7 @@ export default function App() {
             <Stack.Screen name="Inbox" component={Inbox} />
             <Stack.Screen name="Message" component={Message} />
             <Stack.Screen name="MessageSent" component={MessageSent} />
+            <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
           </Stack.Navigator>
         </View>
       </Provider>
