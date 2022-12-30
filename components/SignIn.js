@@ -35,7 +35,14 @@ export function SignIn({ navigation }) {
       axios
         .post("http://localhost:8080/user/signin", credentials)
         .then((response) => dispatch(signIn(response.data)))
-        .then(() => navigation.navigate("Profile", state.userReducer));
+        .then(() => navigation.navigate("Profile", state.userReducer))
+        .catch((err) => {
+          if (err.response.status == 500) {
+            Alert.alert("Server error, check input!");
+          } else {
+            Alert.alert(err.message);
+          }
+        });
     }
   }
   const forgetPassword = () => {};
