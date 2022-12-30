@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
@@ -18,9 +18,13 @@ export function SignIn({ navigation }) {
   const [password, setPassword] = useState("");
   const state = store.getState();
   const dispatch = useDispatch();
-  if (state.userReducer.active == true) {
-    navigation.navigate("Profile", state.userReducer);
-  }
+
+  useEffect(() => {
+    if (state.userReducer.active == true) {
+      navigation.navigate("Profile", state.userReducer);
+    }
+  }, []);
+
   function login() {
     const credentials = {
       email: email,
