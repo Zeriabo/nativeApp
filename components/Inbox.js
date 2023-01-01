@@ -22,7 +22,7 @@ export function Inbox({ route, navigation }) {
   };
 
   var { data, error, isLoading } = useReadMessagesQuery(obj);
-
+  console.log(data);
   if (error) {
     return (
       <View style={styles.container}>
@@ -61,15 +61,17 @@ export function Inbox({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      {isLoading == false && data.messages ? (
+      {data != null ? (
         <FlatList
-          data={isLoading == false ? data.messages : null}
+          data={isLoading == false && data != null ? data.messages : null}
           renderItem={renderItem}
           keyExtractor={(item) => item.id}
         />
       ) : error != undefined ? (
         <Text>{error}</Text>
-      ) : null}
+      ) : (
+        <Text style={styles.empty}>Empty</Text>
+      )}
     </View>
   );
 }
@@ -86,5 +88,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+  },
+  empty: {
+    marginTop: 200,
+    paddingLeft: 150,
+    fontSize: 20,
+    fontFamily: "Arial",
+    fontWeight: "bold",
   },
 });

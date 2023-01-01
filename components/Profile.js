@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { useDispatch } from "react-redux";
 import store from "../state/store/Store";
-import { useLoginQuery } from "../services/userApi";
 import { logOut, signIn } from "../state/store/reducers/userReducer";
 
 export function Profile({ route, navigation }) {
@@ -20,7 +19,7 @@ export function Profile({ route, navigation }) {
   return (
     <View style={styles.container}>
       <View>
-        <Text>Hello</Text>
+        <Text>Hello {state.userReducer.name}</Text>
         <TouchableOpacity
           style={styles.loginBtn}
           onPress={() => logout()}

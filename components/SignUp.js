@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 
-export function SignUp() {
+export function SignUp({ route, navigation }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
@@ -42,9 +42,11 @@ export function SignUp() {
     })
       .then((response) => response.json())
       .then((responseData) => {
-        if (responseData.token != null) {
-          console.log(responseData);
+        if (responseData.active) {
+          Alert.alert("The account has been created!");
           navigation.navigate("Home");
+        } else {
+          Alert.alert("your account has been created but not activated!");
         }
       })
       .catch((error) => {
