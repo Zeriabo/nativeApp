@@ -20,9 +20,7 @@ export function Inbox({ route, navigation }) {
   const obj = {
     token: route.params,
   };
-
   var { data, error, isLoading } = useReadMessagesQuery(obj);
-  console.log(data);
   if (error) {
     return (
       <View style={styles.container}>
