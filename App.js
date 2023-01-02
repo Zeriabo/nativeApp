@@ -20,8 +20,18 @@ import { ForgetPassword } from "./components/ForgetPassword";
 const Stack = createNativeStackNavigator();
 
 const AboutUsScreen = () => (
-  <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    <Text>Details Screen</Text>
+  <View
+    style={{
+      flex: 0,
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <Text>
+      Messaging app which you can use to send messages to accounts made on the
+      app, The backend is Java and the database is postgresql, This app is made
+      by react native
+    </Text>
   </View>
 );
 export default function App() {
