@@ -21,7 +21,7 @@ export function Home({ navigation }) {
       >
         <Image
           source={require("../assets/images/zmessaging.png")}
-          style={{ width: 360, height: 400 }}
+          style={{ width: "100%", height: "50%" }}
         />
 
         <TouchableOpacity
